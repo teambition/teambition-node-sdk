@@ -1,0 +1,6 @@
+{
+  "extends": ["tslint-config-egg"],
+  "linterOptions": {
+    "exclude": ["typings/**/*.d.ts"]
+  }
+}

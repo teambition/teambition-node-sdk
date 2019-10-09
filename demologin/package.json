@@ -1,0 +1,102 @@
+{
+  "name": "demologin",
+  "version": "1.1.0-alpha.22",
+  "description": "",
+  "private": true,
+  "egg": {
+    "typescript": true,
+    "declarations": true
+  },
+  "scripts": {
+    "start:docker": "cross-env NODE_ENV=producation EGG_SERVER_ENV=prod node server.js",
+    "start": "egg-scripts start --daemon --title=demologin",
+    "stop": "egg-scripts stop --title=demologin",
+    "dev": "egg-bin dev",
+    "dev:ci": "cross-env NODE_CONFIG_ENV=ci egg-bin dev --port=8050",
+    "debug": "egg-bin debug",
+    "test-local": "cross-env EGG_SERVER_ENV=test egg-bin test",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "cov": "egg-bin cov",
+    "tsc": "ets && tsc -p tsconfig.json",
+    "ci": "npm run lint && npm run cov && npm run tsc",
+    "autod": "autod",
+    "lint": "tslint --project . -c tslint.json",
+    "clean": "ets clean",
+    "fix": "tslint -c tslint.json -p tsconfig.json --fix",
+    "cz": "git-cz",
+    "cr": "git push origin HEAD:refs/for/$(git rev-parse --abbrev-ref HEAD)",
+    "deploy:ci": "npm run ci && tdt b -a demologin && tdt d -a demologin && npm run clean",
+    "deploy:release": "npm run ci && tdt b -a demologin && tdt d -e production -a demologin && npm run clean",
+    "release": "standard-version",
+    "hotfix": "npm run release -- --release-as patch",
+    "ga": "npm run release -- --prerelease alpha"
+  },
+  "dependencies": {
+    "@hapi/boom": "^7.4.2",
+    "ajv": "^6.10.0",
+    "cross-env": "^5.2.0",
+    "egg": "^2.6.1",
+    "egg-cors": "^2.2.0",
+    "egg-mongoose": "^3.2.0",
+    "egg-router-plus": "^1.3.1",
+    "egg-scripts": "^2.6.0",
+    "swagger-jsdoc": "^3.2.9",
+    "teambition-node-sdk": "git://github.com/teambition/teambition-node-sdk.git",
+    "tws-auth": "^3.2.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "@types/hapi__boom": "^7.4.0",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.12",
+    "@types/supertest": "^2.0.0",
+    "@types/swagger-jsdoc": "^0.0.2",
+    "@types/mongoose": "^5.5.6",
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "commitizen": "^3.1.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.16.0",
+    "husky": "^2.7.0",
+    "lint-staged": "^8.2.1",
+    "standard-version": "^6.0.1",
+    "tslib": "^1.9.0",
+    "tslint": "^5.0.0",
+    "tslint-config-egg": "^1.0.0",
+    "typescript": "^3.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint -- --fix",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "eslintIgnore": [
+    "coverage"
+  ],
+  "author": "",
+  "license": "MIT"
+}
