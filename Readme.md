@@ -27,11 +27,7 @@ const callback = {
       return null;
     }
 
-    ctx.state.authInfo = await AuthInfo.get(ctx as Context, {
-      authType: LoginType.THIRD,
-      user,
-      uid: user.id,
-    });
+    ctx.state.user = user;
     return user;
   },
 };
@@ -91,11 +87,7 @@ const callback = {
       return null;
     }
 
-    ctx.state.authInfo = await AuthInfo.get(ctx as Context, {
-      authType: LoginType.THIRD,
-      user,
-      uid: user.id,
-    });
+    ctx.state.user = user;
     return user;
   },
 };
