@@ -3,7 +3,7 @@
 ## Installation
 
 ```shell
-tnpm i --save git://github.com/teambition/teambition-node-sdk.git
+npm i --save git://github.com/teambition/teambition-node-sdk.git
 ```
 
 ## Usage
