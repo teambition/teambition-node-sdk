@@ -1,4 +1,4 @@
-# @ali/tb-uc-sdk
+# teambition-node-sdk
 
 ## Installation
 
